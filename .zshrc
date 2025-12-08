@@ -92,7 +92,8 @@ alias fn='find . -name'
 alias viag='/usr/local/bin/viag.sh'
 alias lg='lazygit'
 alias vi='nvim'
-alias z='zellij a -c'
+alias z='zellij'
+alias y='yazi'
 
 export PATH="/usr/lib/ccache:$PATH"
 
@@ -141,7 +142,6 @@ alias rnr=read_and_review
 
 # autojump
 [[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && source ~/.autojump/etc/profile.d/autojump.sh
-[[ -f /opt/homebrew/etc/profile.d/autojump.sh ]] && . /opt/homebrew/etc/profile.d/autojump.sh
 
 autoload -U compinit && compinit -u
 
@@ -189,8 +189,27 @@ _fzf_comprun() {
 
 export PATH="$HOME/.local/bin:$PATH"
 export TERM=xterm
-
+#
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+# __conda_setup="$('/home/andreiherdt/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     eval "$__conda_setup"
+# else
+#     if [ -f "/home/andreiherdt/miniconda3/etc/profile.d/conda.sh" ]; then
+#         . "/home/andreiherdt/miniconda3/etc/profile.d/conda.sh"
+#     else
+#         export PATH="/home/andreiherdt/miniconda3/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
+# <<< conda initialize <<<
 
 fix() {
   vi $(git diff --name-only | uniq)
 }
+
+# Set DISPLAY if not already set
+if [ -z "$DISPLAY" ] && [ -n "$XDG_SESSION_TYPE" ]; then
+  export DISPLAY=:1
+fi
